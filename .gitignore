@@ -1,0 +1,7 @@
+*.exe
+*.vscode/
+[Cc]ompiler/
+[Hh]tml/
+[Ll]atex/
+.gitingore
+.txt
