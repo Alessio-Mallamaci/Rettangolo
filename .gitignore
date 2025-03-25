@@ -3,5 +3,4 @@
 [Cc]ompiler/
 [Hh]tml/
 [Ll]atex/
-.gitingore
-.txt
+.gitignore

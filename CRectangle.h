@@ -33,7 +33,7 @@ public:
 	 cella di RAM e deallocazione della memoria
 	*/
 	
-	~Rectangle(); //decostruttore
+	~Rectangle(); //decostruttore --> viene chiamato quando quell'oggetto sparisce dalla memoria
 	/// @}
 	
 	//METODO PER INIZIALIZZARE E CANCELLARE IN MANIERA UNIVOCA UN OGGETTO (NON OBBLIGATORIA):
