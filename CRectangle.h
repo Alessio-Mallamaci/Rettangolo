@@ -17,7 +17,7 @@ private: //non accessibile all'esterno, ma solo le funzioni membro di questa cla
 	float height; //altezza
 	float width; //larghezza
 	
-
+	char* text; //voglio gestire una stringa
 public:
 	
 	
@@ -52,13 +52,14 @@ public:
 	//IDEA DI INCAPSULAMENTO:
 	//------------------------------------------------
 
-
 	/// @name GETTERS / SETTERS
 	/// @{
 	//permette di modificare variabili private
 	void SetHeight(float h);
 	void SetWidth(float w);
-	void SetDim(float w, float h); 
+	void SetDim(float w, float h);
+	
+	void SetText(const char* string);
 	/*motivo concettuale per cui creo queste funzioni (pubbliche) è per avere l'accesso 
 	alle variabili private --> sono dunque funzioni d'interfaccia.
 	Non mettiamo le variabili pubbliche per evitare un controllo sugli input, controllando che il valore 
@@ -73,6 +74,7 @@ public:
 	float GetPerimeter(); 
 	float GetArea();
 	
+	void GetText(char* string);//passo un puntatore e ti copio in memoria il contenuto
 	//------------------------------------------
 
 	/// @}

@@ -5,6 +5,7 @@
 ///
 
 #include<iostream> 
+#include <cstring>
 #include "CRectangle.h"
 using namespace std;
 
@@ -58,7 +59,14 @@ Rectangle::Rectangle(const Rectangle &r) { //uso "const" perchè il parametro ch
 
 /// @brief default initialization of the object
 void Rectangle::Init() {
-	Reset();
+
+	text = new char [1000]; //text (puntatore)con tipo di carattere e dimensione max
+	if (text == NULL) { //controllo 
+		ErrorMessage("Init - memory allocation failed");
+		return;
+	}
+	SetText(""); //scrive una stringa vuota
+	SetDim(0,0); //imposto dimnsione a (0,0)
 	
 }
 
@@ -69,14 +77,18 @@ void Rectangle::Init() {
 /// @param r reference to the object that should be copied 
 void Rectangle::Init(const Rectangle &r) {
 		
-	Reset();
+	Init();
 	SetDim(r.width,r.height); 
+	SetText(r.text);
 	
 }
 
 /// @brief total reset of the object  
 void Rectangle::Reset() {
 	
+	if (text != NULL) 
+		delete text;
+	text = NULL;
 	SetDim(0,0);
 	
 }
@@ -166,7 +178,7 @@ float Rectangle::GetArea() {
 /// @return the area 
 float Rectangle::GetPerimeter() {
 	
-	return (2*(width+height));
+	return (2*(width + height));
 }
 
 
@@ -192,19 +204,34 @@ void Rectangle::WarningMessage(const char *string) {
 //----------------------------------------------------------
 /// @brief for debugging: all about the object
 void Rectangle::Dump() {
+	
 	cout << endl;
 	cout << "---Rectangle---" << endl; 
 	cout << endl;
 	
 	cout << "Width = " << width << endl;
-	cout << "Heigth = " << height << endl;
+	cout << "Heigth = " << height << endl; 
+	cout << "Text = " << text << endl;
+	printf("Text ptr %x\n",text);
 	
 	
 	cout << endl;
-
 }
 //----------------------------------------------------------
 
+void Rectangle::SetText(const char* string) {
+
+	int size = strlen(string);//lunghezza della stringa
+	memcpy(text,string,size); //prendo il contenuto puntato da string e copialo nella nostraarea di memoria text
+	text[size]='\0';
+	
+}
+
+void Rectangle::GetText(char* string) {
+	
+	memcpy(string,text,strlen(text));
+	
+}
 
 
 
