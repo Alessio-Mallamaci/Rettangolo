@@ -211,9 +211,10 @@ void Rectangle::Dump() {
 	
 	cout << "Width = " << width << endl;
 	cout << "Heigth = " << height << endl; 
-	cout << "Text = " << text << endl;
-	printf("Text ptr %x\n",text);
-	
+	if (text != NULL){ //verifico che text non punti a niente
+		cout << "Text = " << text << endl;
+		printf("Text ptr %x\n",text); //solo per vedere cosa fa il puntatore
+	}
 	
 	cout << endl;
 }
