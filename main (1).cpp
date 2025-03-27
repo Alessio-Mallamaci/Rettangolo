@@ -34,6 +34,32 @@ void ProcessRectangle(Rectangle* r) {
 */
 
 
+void ProcessRectangle(Rectangle* r) {
+	
+	char msg1[1000];
+	int size = strlen("scherzone");
+	memcpy(msg1,"scherzone",size); 
+	msg1[size]='\0';
+	
+	cout << endl;
+	cout << "######## Process ###########" << endl;
+	
+	float w = r->GetWidth(); 
+	float h = r->GetHeight();	
+		
+	r->SetWidth(h); 
+	r->SetHeight(w);
+	
+
+	r->SetText(msg1);
+	
+	
+	r->Dump(); 
+	cout << "######### ######### ##########" << endl;
+}
+
+/*
+//in questo caso creerei una copia, nella versione precedente invece passo direttamente l'indirizzo dell'oggetto
 void ProcessRectangle(Rectangle r) {
 	
 	char msg1[1000];
@@ -56,8 +82,7 @@ void ProcessRectangle(Rectangle r) {
 	
 	r.Dump(); 
 	cout << "######### ######### ##########" << endl;
-}
-
+}*/
 
 
 int main() {
@@ -89,7 +114,8 @@ int main() {
 	Viene chiamata la funzione passandogli rectA 
 	E' giusto che venga chiamato il costruttore di copia, perchè si crea una copia locale -->
 	*/
-	ProcessRectangle(rectA); 
+	ProcessRectangle(&rectA); 
+	//ProcessRectangle(rectA); //versione corretta per la parte commentata
 
 	cout << endl;
 	cout << "****** rectangle A dump ******" << endl;
