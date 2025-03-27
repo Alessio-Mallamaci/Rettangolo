@@ -3,22 +3,22 @@
 ///
 ///	Details.
 ///
-
+ 
 #include<iostream> 
 #include <cstring>
-#include "CRectangle.h"
+#include "CRectangle.h" 
 using namespace std;
 
 /// @brief default constructor 
 Rectangle::Rectangle() {
 
-	cout << "Rectangle - constructor - default" << endl; //ha solo utilità didattica
+	cout << "Rectangle - constructor - default" << endl;
 
-	Init(); //inizializza un rettangolo (di dimensione (0,0)
+	Init();
 
 }
 
-/// @brief constructor with 2 parameters
+/// @brief constructor 
 /// @param w width of the rectangle
 /// @param h height of the rectangle
 Rectangle::Rectangle(float w, float h) {
@@ -27,7 +27,6 @@ Rectangle::Rectangle(float w, float h) {
 
 	cout << "Rectangle - constructor" << endl;
 
-	//controlla parametri di w e h (se ne potrebbero fare più controlli, ma questo è quello minimale)
 	if (w <= 0. || h <= 0.) {
 		WarningMessage("constructor: width and height should be > 0"); 
 		SetDim(0,0);
@@ -41,18 +40,43 @@ Rectangle::Rectangle(float w, float h) {
 Rectangle::~Rectangle() {
 
 	cout << "Rectangle - destructor" << endl;
-	Reset(); // riporta tutto a (0,0)
+	Reset();
 
+}
+
+/// @brief overload of operator = 
+/// @param o reference to the object on the right side of the operator 
+/// @return reference to the object on the left side of the operator 
+Rectangle& Rectangle::operator=(const Rectangle &r) { 
+
+	cout << "Rectangle - operator =" << endl;
+	
+	
+	Init(r);
+	
+	return *this;
+	
+}
+
+/// @brief overload of operator == 
+/// @param r reference to the object on the right side of the operator 
+/// @return true if the two objects have the same width and the same length  
+bool Rectangle::operator==(const Rectangle &r) { 
+
+	if (r.width == width && r.height == height)
+		return true;
+		
+	return false;
 }
 
 
 /// @brief copy constructor 
 /// @param o reference to the object that should be copied 
-Rectangle::Rectangle(const Rectangle &r) { //uso "const" perchè il parametro che ti sto passando NON voglio che venga modificato
+Rectangle::Rectangle(const Rectangle &r) { 
 
 	cout << "Rectangle - copy constructor" << endl;
 
-	Init(r); //costruisco un oggetto rettangolo che ne faccia una copia sulla base dei due parametri passati in input
+	Init(r);
 	
 }
 
@@ -60,27 +84,23 @@ Rectangle::Rectangle(const Rectangle &r) { //uso "const" perchè il parametro ch
 /// @brief default initialization of the object
 void Rectangle::Init() {
 
-	text = new char [1000]; //text (puntatore)con tipo di carattere e dimensione max
-	if (text == NULL) { //controllo 
+	text = new char [1000]; 
+	if (text == NULL) {
 		ErrorMessage("Init - memory allocation failed");
 		return;
 	}
-	SetText(""); //scrive una stringa vuota
-	SetDim(0,0); //imposto dimnsione a (0,0)
-	
+	SetText("");
+	SetDim(0,0);
 }
 
 
-//Init e Reset collaborano per inizializzare un rettangolo di dimensione (0,0)
-//----------------------------------------
 /// @brief initialization of the object as a copy of an object 
 /// @param r reference to the object that should be copied 
 void Rectangle::Init(const Rectangle &r) {
-		
+	
 	Init();
 	SetDim(r.width,r.height); 
 	SetText(r.text);
-	
 }
 
 /// @brief total reset of the object  
@@ -92,14 +112,8 @@ void Rectangle::Reset() {
 	SetDim(0,0);
 	
 }
-//--------------------------
 
 
-/*
-A ogni "set", faccio un controllo di quello che sto passando
-A ogni "get" ritornano i parametri che mi hai chiesto
-*/
-//----------------------------------------------------------------------
 /// @brief set width of the object
 /// @param w width 
 void Rectangle::SetWidth(float w) {
@@ -164,8 +178,6 @@ void Rectangle::GetDim(float &w, float &h) {
 	
 	return;
 }
-//----------------------------------------------------------------------
-
 
 /// @brief computes the area of the object
 /// @return the area 
@@ -178,7 +190,7 @@ float Rectangle::GetArea() {
 /// @return the area 
 float Rectangle::GetPerimeter() {
 	
-	return (2*(width + height));
+	return (2*(width+height));
 }
 
 
@@ -200,30 +212,27 @@ void Rectangle::WarningMessage(const char *string) {
 
 }
 
-//FUNZIONE DI SERVIZIO --> ti dice tutto riguardo una classe
-//----------------------------------------------------------
+
 /// @brief for debugging: all about the object
 void Rectangle::Dump() {
-	
 	cout << endl;
 	cout << "---Rectangle---" << endl; 
 	cout << endl;
 	
 	cout << "Width = " << width << endl;
 	cout << "Heigth = " << height << endl; 
-	if (text != NULL){ //verifico che text non punti a niente
+	if (text != NULL)
 		cout << "Text = " << text << endl;
-		printf("Text ptr %x\n",text); //solo per vedere cosa fa il puntatore
-	}
+	
 	
 	cout << endl;
+
 }
-//----------------------------------------------------------
 
 void Rectangle::SetText(const char* string) {
 
-	int size = strlen(string);//lunghezza della stringa
-	memcpy(text,string,size); //prendo il contenuto puntato da string e copialo nella nostraarea di memoria text
+	int size = strlen(string);
+	memcpy(text,string,size); 
 	text[size]='\0';
 	
 }
