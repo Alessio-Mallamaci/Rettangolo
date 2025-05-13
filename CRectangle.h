@@ -25,7 +25,7 @@ public: // Interfaccia pubblica della classe
     Rectangle();                      // Costruttore di default: crea un rettangolo con valori iniziali nulli
     Rectangle(float w, float l);      // Costruttore parametrico: inizializza con larghezza e altezza specificate
     Rectangle(const Rectangle &r);    // Costruttore di copia: inizializza copiando un altro oggetto Rectangle
-    ~Rectangle();                     // Distruttore: libera la memoria dinamica associata al testo
+    ~Rectangle();                     // Distruttore: libera la memoria dinamica associata al testo una volta uscito dallo scope!!
     /// @}
 
     /// @name OPERATORS
